@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/prefix">
+        <file>buttons/back.ico</file>
+        <file>buttons/copy.ico</file>
+        <file>buttons/delete.ico</file>
+        <file>buttons/edit.ico</file>
+        <file>buttons/next.ico</file>
+        <file>buttons/password-manager.ico</file>
+        <file>buttons/play.ico</file>
+        <file>buttons/plus.ico</file>
+        <file>buttons/previous.ico</file>
+        <file>buttons/save_1.ico</file>
+        <file>buttons/visual.ico</file>
+        <file>buttons/stop-button.ico</file>
+        <file>buttons/pause.ico</file>
+    </qresource>
+</RCC>

@@ -33,6 +33,9 @@ private slots:
     void on_nextButton_clicked();
     void on_previousButton_clicked();
 
+    void on_repeatButton_toggled(bool checked);
+    void handleMediaStatusChanged(QMediaPlayer::MediaStatus status); // Новый слот
+
     // Слоты для прогресс-бара и громкости
     void on_progressBar_sliderMoved(int position);
     void on_volumeSlider_valueChanged(int value);
@@ -53,6 +56,9 @@ private slots:
     void on_songListView_doubleClicked(const QModelIndex &index);
     void on_playlistListView_doubleClicked(const QModelIndex &index);
 
+
+    void on_repeatButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     MusicPlayer *musicPlayer; // Теперь инстанс MusicPlayer
@@ -60,6 +66,8 @@ private:
 
     QStandardItemModel *songListModel;
     QStandardItemModel *playlistListModel;
+
+    bool isRepeatEnabled = false;
 
     void initializeUIState();
     void loadDataIntoModels();

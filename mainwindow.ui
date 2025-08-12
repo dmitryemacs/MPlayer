@@ -104,6 +104,17 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="repeatButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/prefix/buttons/repeat.ico</normaloff>:/prefix/buttons/repeat.ico</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_controls">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
@@ -131,7 +142,7 @@
          <number>100</number>
         </property>
         <property name="value">
-         <number>50</number>
+         <number>100</number>
         </property>
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
@@ -167,7 +178,26 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="1" rowspan="4">
-         <widget class="QListView" name="songListView"/>
+         <widget class="QListView" name="songListView">
+          <property name="editTriggers">
+           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+          </property>
+          <property name="dragEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="movement">
+           <enum>QListView::Movement::Snap</enum>
+          </property>
+          <property name="isWrapping" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="resizeMode">
+           <enum>QListView::ResizeMode::Adjust</enum>
+          </property>
+          <property name="layoutMode">
+           <enum>QListView::LayoutMode::Batched</enum>
+          </property>
+         </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="albumArtLabel">
@@ -236,6 +266,7 @@
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -245,8 +276,43 @@
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menumenu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="action"/>
+    <addaction name="action_2"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Справка</string>
+    </property>
+    <addaction name="actionAbout_Programm"/>
+    <addaction name="actionManual"/>
+   </widget>
+   <addaction name="menumenu"/>
+   <addaction name="menuAbout"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbout_Programm">
+   <property name="text">
+    <string>Справка</string>
+   </property>
+  </action>
+  <action name="actionManual">
+   <property name="text">
+    <string>О приложении</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Настройки</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>Выйти</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="resources.qrc"/>

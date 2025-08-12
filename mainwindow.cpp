@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(musicPlayer, &MusicPlayer::durationChanged, this, &MainWindow::handlePlayerDurationChanged);
     connect(musicPlayer, &MusicPlayer::metaDataChanged, this, &MainWindow::handlePlayerMetaDataChanged);
     connect(musicPlayer, &MusicPlayer::errorOccurred, this, &MainWindow::handlePlayerError);
+    connect(musicPlayer, &MusicPlayer::mediaStatusChanged, this, &MainWindow::handleMediaStatusChanged);
+
 
     // Установка громкости по умолчанию
     musicPlayer->setVolume(ui->volumeSlider->value());
@@ -338,3 +340,25 @@ void MainWindow::updateAlbumArt(const QImage &image)
         ui->albumArtLabel->setText("");
     }
 }
+
+void MainWindow::handleMediaStatusChanged(QMediaPlayer::MediaStatus status)
+{
+    if (status == QMediaPlayer::EndOfMedia) {
+        if (isRepeatEnabled) {
+            // Если повтор включен, просто перезапускаем текущий трек с начала
+            musicPlayer->setPosition(0);
+            musicPlayer->play();
+            qDebug() << "Repeating current track.";
+        } else {
+            // Если повтор выключен, переходим к следующему треку (или останавливаемся)
+            on_nextButton_clicked();
+        }
+    }
+}
+
+void MainWindow::on_repeatButton_clicked()
+{
+    isRepeatEnabled = true;
+    qDebug() << "Repeat is now:" << (true ? "ON" : "OFF");
+}
+

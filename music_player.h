@@ -22,6 +22,8 @@ public:
     void play();
     void pause();
     void stop();
+    void shuffle();
+    void repeat();
     void setSource(const QString& filePath);
     void setVolume(int value);
     void setPosition(qint64 position);
@@ -37,6 +39,7 @@ signals:
     void durationChanged(qint64 duration);
     void metaDataChanged(const QString& title, const QString& artist, const QImage& albumArt);
     void errorOccurred(const QString& errorMessage); // This signal takes a QString
+    void mediaStatusChanged(QMediaPlayer::MediaStatus status);
 
 private slots:
     void handlePlaybackStateChanged(QMediaPlayer::PlaybackState state);

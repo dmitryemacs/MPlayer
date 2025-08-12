@@ -21,6 +21,11 @@ MusicPlayer::MusicPlayer(QObject *parent)
     connect(mediaPlayer, &QMediaPlayer::metaDataChanged,
             this, &MusicPlayer::handleMetaDataChanged);
 
+
+    connect(mediaPlayer, &QMediaPlayer::mediaStatusChanged,
+            this, &MusicPlayer::mediaStatusChanged);
+
+
     // Подключение сигнала errorOccurred с правильной перегрузкой
     // В Qt 6, errorOccurred имеет сигнатуру (QMediaPlayer::Error, const QString &)
     connect(mediaPlayer, QOverload<QMediaPlayer::Error, const QString &>::of(&QMediaPlayer::errorOccurred),
@@ -46,6 +51,11 @@ void MusicPlayer::pause()
     mediaPlayer->pause();
 }
 
+void MusicPlayer::repeat() {
+
+    mediaPlayer->setLoops(3);
+}
+
 void MusicPlayer::stop()
 {
     mediaPlayer->stop();
@@ -57,8 +67,7 @@ void MusicPlayer::setSource(const QString& filePath)
     mediaPlayer->setSource(QUrl::fromLocalFile(filePath));
 }
 
-void MusicPlayer::setVolume(int value)
-{
+void MusicPlayer::setVolume(int value) {
     // Устанавливает громкость (значение от 0 до 100)
     audioOutput->setVolume(value / 100.0);
 }

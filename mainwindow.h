@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QTime>
+#include <QMenu>
 
 // Включаем новые заголовочные файлы
 #include "database_manager.h"
@@ -34,7 +35,7 @@ private slots:
     void on_previousButton_clicked();
 
     void on_repeatButton_toggled(bool checked);
-    void handleMediaStatusChanged(QMediaPlayer::MediaStatus status); // Новый слот
+    void handleMediaStatusChanged(QMediaPlayer::MediaStatus status);
 
     // Слоты для прогресс-бара и громкости
     void on_progressBar_sliderMoved(int position);
@@ -44,33 +45,47 @@ private slots:
     void on_addSongButton_clicked();
     void on_createPlaylistButton_clicked();
     void on_deleteSongButton_clicked();
+    void on_deletePlaylistButton_clicked();
 
     // Слоты от MusicPlayer
     void handlePlayerPlaybackStateChanged(QMediaPlayer::PlaybackState state);
     void handlePlayerPositionChanged(qint64 position);
     void handlePlayerDurationChanged(qint64 duration);
-    void handlePlayerMetaDataChanged(const QString& title, const QString& artist, const QImage& albumArt);
+    void handlePlayerMetaDataChanged(const QString& title, const QString& artist, const QString& album, const QImage& albumArt);
     void handlePlayerError(const QString& errorMessage);
 
     // Слоты для выбора песен/плейлистов
     void on_songListView_doubleClicked(const QModelIndex &index);
-    void on_playlistListView_doubleClicked(const QModelIndex &index);
+    void on_playlistListView_doubleIndexClicked(const QModelIndex &index); // Исправлено название слота для ясности
 
-
-    void on_repeatButton_clicked();
+    // Слоты для контекстного меню и управления списками
+    void on_songListView_customContextMenuRequested(const QPoint &pos);
+    void addSongToSpecificPlaylist(int songId, int playlistId);
+    void on_tabWidget_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;
-    MusicPlayer *musicPlayer; // Теперь инстанс MusicPlayer
-    DatabaseManager *dbManager; // Теперь инстанс DatabaseManager
+    MusicPlayer *musicPlayer;
+    DatabaseManager *dbManager;
 
     QStandardItemModel *songListModel;
     QStandardItemModel *playlistListModel;
 
     bool isRepeatEnabled = false;
 
+    int m_currentViewingPlaylistId; // -1, если показываются все песни; ID плейлиста, если показываются песни плейлиста
+
+    // НОВЫЕ ПЕРЕМЕННЫЕ ДЛЯ ВОСПРОИЗВЕДЕНИЯ
+    QList<SongInfo> m_playbackQueue; // Текущий список песен для воспроизведения
+    int m_currentSongIndex;         // Индекс текущей песни в m_playbackQueue
+
     void initializeUIState();
-    void loadDataIntoModels();
+    void loadAllSongs();
+    void loadSongsForPlaylist(int playlistId, const QString& playlistName);
+
+    // НОВАЯ ФУНКЦИЯ: Воспроизводит песню по индексу из m_playbackQueue
+    void playSongAtIndex(int index);
+
     void updateUIForPlaybackState(QMediaPlayer::PlaybackState state);
     void updateCurrentTrackInfo(const QString &title, const QString &artist);
     void updateAlbumArt(const QImage &image);

@@ -112,6 +112,9 @@
          <iconset resource="resources.qrc">
           <normaloff>:/prefix/buttons/repeat.ico</normaloff>:/prefix/buttons/repeat.ico</iconset>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -170,36 +173,30 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_library">
        <attribute name="title">
         <string>Библиотека песен</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="1" rowspan="4">
-         <widget class="QListView" name="songListView">
-          <property name="editTriggers">
-           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+        <item row="2" column="1" rowspan="2">
+         <widget class="QLabel" name="currentSongListViewTitleLabel">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <bold>true</bold>
+           </font>
           </property>
-          <property name="dragEnabled">
-           <bool>false</bool>
+          <property name="text">
+           <string>Библиотека песен</string>
           </property>
-          <property name="movement">
-           <enum>QListView::Movement::Snap</enum>
-          </property>
-          <property name="isWrapping" stdset="0">
-           <bool>false</bool>
-          </property>
-          <property name="resizeMode">
-           <enum>QListView::ResizeMode::Adjust</enum>
-          </property>
-          <property name="layoutMode">
-           <enum>QListView::LayoutMode::Batched</enum>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="albumArtLabel">
           <property name="minimumSize">
            <size>
@@ -221,18 +218,32 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="addSongButton">
-          <property name="text">
-           <string>Добавить трек</string>
+        <item row="1" column="1">
+         <widget class="QListView" name="songListView">
+          <property name="contextMenuPolicy">
+           <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
           </property>
-          <property name="icon">
-           <iconset resource="resources.qrc">
-            <normaloff>:/prefix/buttons/plus.ico</normaloff>:/prefix/buttons/plus.ico</iconset>
+          <property name="editTriggers">
+           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+          </property>
+          <property name="dragEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="movement">
+           <enum>QListView::Movement::Snap</enum>
+          </property>
+          <property name="isWrapping" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="resizeMode">
+           <enum>QListView::ResizeMode::Adjust</enum>
+          </property>
+          <property name="layoutMode">
+           <enum>QListView::LayoutMode::Batched</enum>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QPushButton" name="deleteSongButton">
           <property name="text">
            <string>Удалить трек</string>
@@ -240,6 +251,17 @@
           <property name="icon">
            <iconset resource="resources.qrc">
             <normaloff>:/prefix/buttons/delete.ico</normaloff>:/prefix/buttons/delete.ico</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="addSongButton">
+          <property name="text">
+           <string>Добавить трек</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/prefix/buttons/plus.ico</normaloff>:/prefix/buttons/plus.ico</iconset>
           </property>
          </widget>
         </item>
@@ -257,6 +279,41 @@
          <widget class="QPushButton" name="createPlaylistButton">
           <property name="text">
            <string>Создать плейлист</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deletePlaylistButton">
+          <property name="text">
+           <string>Удалить плейлист</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Редактировае метаданных</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="2" column="0">
+         <widget class="QLabel" name="yearLabel">
+          <property name="text">
+           <string>Год:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="albumLabel">
+          <property name="text">
+           <string>Альбом:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="editMetadataButton">
+          <property name="text">
+           <string>Редактировать метаданные</string>
           </property>
          </widget>
         </item>

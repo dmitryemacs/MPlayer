@@ -13,5 +13,6 @@
         <file>buttons/visual.ico</file>
         <file>buttons/stop-button.ico</file>
         <file>buttons/pause.ico</file>
+        <file>buttons/repeat.ico</file>
     </qresource>
 </RCC>

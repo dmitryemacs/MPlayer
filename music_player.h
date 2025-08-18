@@ -37,7 +37,7 @@ signals:
     void playbackStateChanged(QMediaPlayer::PlaybackState state);
     void positionChanged(qint64 position);
     void durationChanged(qint64 duration);
-    void metaDataChanged(const QString& title, const QString& artist, const QImage& albumArt);
+    void metaDataChanged(const QString& title, const QString& artist, const QString& album, const QImage& albumArt); // ИЗМЕНЕНО: добавлено album
     void errorOccurred(const QString& errorMessage); // This signal takes a QString
     void mediaStatusChanged(QMediaPlayer::MediaStatus status);
 

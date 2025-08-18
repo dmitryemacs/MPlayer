@@ -130,7 +130,7 @@ void MusicPlayer::handleMetaDataChanged()
     if (artist.isEmpty()) {
         artist = mediaPlayer->metaData().stringValue(QMediaMetaData::ContributingArtist);
     }
-    // QString album = mediaPlayer->metaData().stringValue(QMediaMetaData::AlbumTitle); // Можно использовать, если нужно
+    QString album = mediaPlayer->metaData().stringValue(QMediaMetaData::AlbumTitle); // НОВОЕ: Извлечение названия альбома
 
     // Если заголовок отсутствует в метаданных, используем базовое имя файла
     if (title.isEmpty()) {
@@ -160,7 +160,7 @@ void MusicPlayer::handleMetaDataChanged()
             buffer.close();
         }
     }
-    emit metaDataChanged(title, artist, coverImage);
+    emit metaDataChanged(title, artist, album, coverImage); // ИЗМЕНЕНО: передаем album
 }
 
 void MusicPlayer::handleError(QMediaPlayer::Error error, const QString &errorString)
